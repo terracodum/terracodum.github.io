@@ -258,7 +258,6 @@ p:last-child { margin-bottom: 0; }
   padding: 16px;
 }
 .shot.wide { grid-column: 1 / -1; aspect-ratio: 16 / 7; }
-.shot img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
 
 @media (max-width: 600px) {
   .wrap { padding: 40px 20px 80px; }
