@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ExpenseMind — Никита Харлов</title>
+<link rel="stylesheet" href="../shared.css" />
+<link rel="stylesheet" href="expensemind.css" />
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../index.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 3L5 8l5 5"/>
+      </svg>
+      <span>back to index</span>
+    </a>
+
+    <header class="hero">
+      <div class="hero-meta">
+        <span class="status"><span class="status-dot"></span>active</span>
+        <span class="sep">·</span>
+        <span>solo</span>
+        <span class="sep">·</span>
+        <span>2025 — present</span>
+      </div>
+
+      <h1>ExpenseMind</h1>
+      <p class="pitch">
+        Локальный инструмент учёта личных финансов с <strong>ML-прогнозированием баланса</strong>.
+        Работает полностью на твоей машине — данные никуда не уходят.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn" href="https://github.com/terracodum/expensemind" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34c-2.23.49-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.88 2.34.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 018 4.32c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span>view on github</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- problem -->
+    <section>
+      <p class="label">// проблема</p>
+      <p>
+        Большинство трекеров финансов требуют регистрацию, синхронизируют данные
+        с облаком и собирают аналитику о тратах. Личные финансы — одна из самых
+        чувствительных категорий данных, и доверять её сторонним сервисам
+        не хочется.
+      </p>
+      <p>
+        При этом простые self-hosted альтернативы упираются в скучный учёт:
+        категории, графики, экспорт в CSV. Никакой помощи от софта — только
+        ручной ввод и ретроспектива.
+      </p>
+    </section>
+
+    <!-- solution -->
+    <section>
+      <p class="label">// решение</p>
+      <p>
+        <strong>ExpenseMind</strong> запускается одной командой через Docker и
+        хранит всё в SQLite на твоей машине. Загружаешь PDF-выписку из банка —
+        получаешь категоризированный список транзакций и прогноз баланса
+        на 30 дней вперёд.
+      </p>
+      <p>
+        Прогноз строится локальной Prophet-моделью с учётом сезонности.
+        Никакого облака, аккаунтов и подписок.
+      </p>
+    </section>
+
+    <!-- features -->
+    <section>
+      <p class="label">// что умеет</p>
+      <ul class="features">
+        <li>
+          <span class="marker">01</span>
+          <div>
+            <div class="feat-title">Загрузка PDF-выписок</div>
+            <div class="feat-desc">Т-Банк, ВТБ, Сбербанк, Ozon Банк. Также CSV в простом формате.</div>
+          </div>
+        </li>
+        <li>
+          <span class="marker">02</span>
+          <div>
+            <div class="feat-title">Ручной ввод транзакций</div>
+            <div class="feat-desc">Форма для разовых трат, переводов, доходов мимо выписок.</div>
+          </div>
+        </li>
+        <li>
+          <span class="marker">03</span>
+          <div>
+            <div class="feat-title">Категоризация</div>
+            <div class="feat-desc">Расходы и доходы по категориям с возможностью править вручную.</div>
+          </div>
+        </li>
+        <li>
+          <span class="marker">04</span>
+          <div>
+            <div class="feat-title">Прогноз баланса на 30 дней</div>
+            <div class="feat-desc">Prophet с учётом сезонности, по дням, с датами на графике.</div>
+          </div>
+        </li>
+        <li>
+          <span class="marker">05</span>
+          <div>
+            <div class="feat-title">История прогнозов</div>
+            <div class="feat-desc">Все запуски сохраняются — можно сравнить как менялся прогноз во времени.</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- screenshots -->
+    <section>
+      <p class="label">// интерфейс</p>
+      <div class="shots">
+        <div class="shot wide">[ forecast — 30-day balance prediction chart ]</div>
+        <div class="shot">[ transactions list ]</div>
+        <div class="shot">[ upload statement modal ]</div>
+      </div>
+    </section>
+
+    <!-- architecture -->
+    <section>
+      <p class="label">// архитектура</p>
+      <div class="diagram">
+<pre>           <span class="node">Браузер</span>  <span class="arr">(React + MUI)</span>
+                │
+            <span class="arr">HTTP / JSON</span>
+                │
+        <span class="node accent">Go Backend</span>  <span class="arr">────</span>  <span class="node">SQLite</span>
+                │
+            <span class="arr">HTTP / JSON</span>
+                │
+       <span class="node">Python ML-сервис</span>  <span class="arr">(stateless)</span></pre>
+      </div>
+      <ul class="principles">
+        <li><strong>Go — единственная точка входа</strong>, вся бизнес-логика в нём.</li>
+        <li><strong>ML-сервис только считает прогноз</strong>, к БД доступа не имеет — это упрощает деплой и изоляцию.</li>
+        <li><strong>Парсинг PDF и CSV — только в Go</strong> (через <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text)">pdftotext</span> + собственные парсеры под каждый банк).</li>
+      </ul>
+    </section>
+
+    <!-- supported banks -->
+    <section>
+      <p class="label">// поддержка банков</p>
+      <table class="banks">
+        <thead>
+          <tr><th>банк</th><th>формат</th><th>метод</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Т-Банк</td><td>PDF выписка</td><td class="mono">native parser</td></tr>
+          <tr><td>ВТБ</td><td>PDF выписка</td><td class="mono">pdftotext</td></tr>
+          <tr><td>Сбербанк</td><td>PDF выписка</td><td class="mono">pdftotext</td></tr>
+          <tr><td>Ozon Банк</td><td>PDF выписка</td><td class="mono">pdftotext</td></tr>
+          <tr><td>любой</td><td>CSV (`;`-разделитель)</td><td class="mono">native parser</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- API -->
+    <section>
+      <p class="label">// api</p>
+      <div class="api">
+<span class="verb">POST</span> <span class="path">/api/v1/transactions/upload?bank=vtb</span>  <span class="comment">— загрузка PDF/CSV</span>
+<span class="verb">POST</span> <span class="path">/api/v1/transactions</span>                   <span class="comment">— добавить транзакцию</span>
+<span class="verb">GET</span>  <span class="path">/api/v1/transactions</span>                   <span class="comment">— список транзакций</span>
+<span class="verb">GET</span>  <span class="path">/api/v1/analytics/forecast</span>             <span class="comment">— история прогнозов</span>
+<span class="verb">POST</span> <span class="path">/api/v1/analytics/forecast</span>             <span class="comment">— запустить новый</span>
+      </div>
+    </section>
+
+    <!-- stack -->
+    <section>
+      <p class="label">// стек</p>
+      <div class="stack-groups">
+        <div class="stack-group">
+          <div class="stack-label">frontend</div>
+          <div class="stack">
+            <span class="chip">React</span>
+            <span class="chip">MUI</span>
+            <span class="chip">TanStack Query</span>
+            <span class="chip">Recharts</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">backend</div>
+          <div class="stack">
+            <span class="chip">Go 1.26</span>
+            <span class="chip">chi</span>
+            <span class="chip">SQLite</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">ml</div>
+          <div class="stack">
+            <span class="chip">Python</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">Prophet</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">инфра</div>
+          <div class="stack">
+            <span class="chip">Docker Compose</span>
+            <span class="chip">pdftotext (poppler)</span>
+            <span class="chip">Make</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- install -->
+    <section>
+      <p class="label">// установка</p>
+      <p>Нужны Docker Desktop и git. Дальше:</p>
+      <div class="code"><span class="prompt">$ </span>git clone https://github.com/terracodum/expensemind.git
+<span class="prompt">$ </span>cd expensemind
+<span class="prompt">$ </span>sudo make install
+<span class="prompt">$ </span>expensemind   <span class="comment"># открой http://localhost</span></div>
+    </section>
+
+  </div>
+</body>
+</html>
