@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#0e0e0d"/>
+  <path d="M3 11 L8 16 L3 21" stroke="oklch(0.78 0.09 145)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="11.5" y="20.5" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="12" font-weight="700" fill="#ededea">NH</text>
+</svg>
