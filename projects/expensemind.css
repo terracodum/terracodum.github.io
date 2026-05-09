@@ -204,6 +204,7 @@ p:last-child { margin-bottom: 0; }
   font-size: 13px;
   line-height: 1.9;
   overflow-x: auto;
+  white-space: pre;
 }
 .api .verb {
   display: inline-block;
