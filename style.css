@@ -1,5 +1,41 @@
 .wrap { padding: 96px 32px 120px; }
 
+.port-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 40px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px;
+}
+.port-home {
+  color: var(--text-faint);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+.port-home:hover { color: var(--text); }
+.port-tabs {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+}
+.tab {
+  padding: 5px 12px;
+  border-radius: 4px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 120ms ease, background 120ms ease;
+}
+.tab:hover { color: var(--text); }
+.tab.is-active {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+
 header { margin-bottom: 64px; }
 
 .signal {
@@ -95,6 +131,73 @@ h1 .handle {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.section-stack { margin-top: 56px; }
+
+.achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.achievement-meta {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--text-faint);
+  margin: 0 0 12px;
+}
+
+.hub {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.hub-card {
+  display: block;
+  padding: 24px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.hub-card:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-hover);
+}
+.hub-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.hub-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+.hub-arrow {
+  width: 16px;
+  height: 16px;
+  color: var(--text-faint);
+  transition: transform 160ms ease, color 160ms ease;
+}
+.hub-card:hover .hub-arrow {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+.hub-desc {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin: 0 0 16px;
+  text-wrap: pretty;
+}
+
+@media (max-width: 600px) {
+  .hub { grid-template-columns: 1fr; }
 }
 
 .project {

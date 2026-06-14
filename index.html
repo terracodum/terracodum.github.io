@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Никита Харлов — Go / backend</title>
+<title>Никита Харлов — портфолио</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="stylesheet" href="shared.css" />
 <link rel="stylesheet" href="style.css" />
@@ -16,11 +16,11 @@
         <span>open to collaborate</span>
       </div>
 
-      <h1>Никита Харлов <span class="handle">— Go / backend</span></h1>
+      <h1>Никита Харлов</h1>
 
       <p class="bio">
-        Бэкенд-разработчик. Пишу код, читаю документацию, чиню баги.
-        Ниже — то, над чем работаю.
+        Пишу код, обучаю модели, читаю документацию. Два направления —
+        выбери, что интересно.
       </p>
 
       <div class="links">
@@ -31,13 +31,48 @@
       </div>
     </header>
 
-    <section>
+    <section id="achievements-section">
       <div class="section-head">
-        <h2>// projects</h2>
-        <span class="count" id="project-count"></span>
+        <h2>// achievements</h2>
+        <span class="count" id="achievement-count"></span>
       </div>
 
-      <div class="projects" id="projects"></div>
+      <div class="achievements" id="achievements"></div>
+    </section>
+
+    <section class="section-stack">
+      <div class="section-head">
+        <h2>// portfolios</h2>
+        <span class="count">02</span>
+      </div>
+
+      <div class="hub">
+        <a class="hub-card" href="backend.html">
+          <div class="hub-head">
+            <h3 class="hub-title">Backend</h3>
+            <svg class="hub-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+          </div>
+          <p class="hub-desc">Go, базы данных, сервисы и API. Проекты, которые крутятся в проде.</p>
+          <div class="stack">
+            <span class="chip">Go</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">Docker</span>
+          </div>
+        </a>
+
+        <a class="hub-card" href="ml.html">
+          <div class="hub-head">
+            <h3 class="hub-title">ML / AI</h3>
+            <svg class="hub-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+          </div>
+          <p class="hub-desc">LLM-пайплайны, анализ данных, кластеризация. Хакатоны и эксперименты.</p>
+          <div class="stack">
+            <span class="chip">Python</span>
+            <span class="chip">LLM</span>
+            <span class="chip">PyTorch</span>
+          </div>
+        </a>
+      </div>
     </section>
 
     <footer>
@@ -46,6 +81,8 @@
     </footer>
   </div>
 
-<script src="main.js"></script>
+<script src="portfolio.js"></script>
+<script src="achievements.js"></script>
+<script>renderPortfolio({ achievements: ACHIEVEMENTS });</script>
 </body>
 </html>

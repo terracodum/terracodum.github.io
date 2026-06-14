@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ZeroProblems — Никита Харлов</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="../shared.css" />
+<link rel="stylesheet" href="zerocode.css" />
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../ml.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 3L5 8l5 5"/>
+      </svg>
+      <span>back to ml</span>
+    </a>
+
+    <header class="hero">
+      <div class="hero-meta">
+        <span class="status"><span class="status-dot"></span>1st place</span>
+        <span class="sep">·</span>
+        <span>команда ZeroCode · 5 человек</span>
+        <span class="sep">·</span>
+        <span>Июнь 2026</span>
+      </div>
+
+      <h1>ZeroProblems</h1>
+      <p class="pitch">
+        Веб-платформа, которая превращает обезличенную выгрузку обращений граждан в Excel
+        в управленческую аналитику: <strong>классифицирует тяжесть каждого обращения дообученной
+        RuBERT и показывает на карте, какие муниципалитеты Омской области в наиболее тяжёлом
+        состоянии</strong> — с Health Score, drilldown по районам и LLM-справками.
+      </p>
+
+      <div class="hero-actions">
+        <!-- Когда будет репозиторий — раскомментируй и подставь ссылку:
+        <a class="btn" href="https://github.com/terracodum/REPO" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34c-2.23.49-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.88 2.34.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 018 4.32c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span>view on github</span>
+        </a>
+        -->
+        <a class="btn" href="https://rsv.ru/news/3/9249/" target="_blank" rel="noopener">
+          <span>официальные итоги</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- problem -->
+    <section>
+      <p class="label">// задача</p>
+      <p>
+        Регион получает поток обращений граждан (жалобы, инциденты, аварии) — десятки тысяч строк
+        в Excel-выгрузках. Вручную понять, где ситуация критическая, по каким темам и какие
+        муниципалитеты требуют внимания в первую очередь, — невозможно. Нужен инструмент, который
+        автоматически оценивает <strong>тяжесть</strong> каждого обращения и сводит это в понятную
+        для управленцев картину по территориям.
+      </p>
+    </section>
+
+    <!-- solution -->
+    <section>
+      <p class="label">// решение</p>
+      <p>
+        End-to-end платформа: загрузка Excel → автоопределение формата → классификация тяжести
+        дообученной RuBERT (ONNX Runtime, GPU/CPU) → агрегация в Health Score по муниципалитетам →
+        интерактивная карта, дашборд и drilldown по районам. Поверх — LLM-справки и PDF-отчёты
+        (локальная модель через Ollama, без внешних API), прогноз динамики, ролевой доступ
+        (админ / оператор / аналитик), живая лента и форма подачи обращений. Всё разворачивается
+        одной командой через Docker Compose.
+      </p>
+    </section>
+
+    <!-- what it does -->
+    <section>
+      <p class="label">// что сделали</p>
+      <ul class="features">
+        <li>
+          <span class="marker">01</span>
+          <div>
+            <div class="feat-title">Загрузка и парсинг Excel</div>
+            <div class="feat-desc">Автоопределение нескольких раскладок колонок, чтение через calamine/openpyxl, очистка и нормализация текста.</div>
+          </div>
+        </li>
+        <li>
+          <span class="marker">02</span>
+          <div>
+            <div class="feat-title">ONNX-классификация тяжести</div>
+            <div class="feat-desc">Дообученная RuBERT, 5 классов тяжести (0–4), батч-инференс на ONNX Runtime с CUDA и fallback на CPU.</div>
+          </div>
+        </li>
+        <li>
+          <span class="marker">03</span>
+          <div>
+            <div class="feat-title">Health Score по муниципалитетам</div>
+            <div class="feat-desc">Взвешивание классов (0→0 … 4→100) и лог-нормировка на объём обращений → единый скор 5–100 на каждый МО.</div>
+          </div>
+        </li>
+        <li>
+          <span class="marker">04</span>
+          <div>
+            <div class="feat-title">Карта, дашборд и drilldown</div>
+            <div class="feat-desc">Leaflet + GeoJSON границ Омской области, рейтинг районов, Top-10 тем, развёртка по конкретному муниципалитету.</div>
+          </div>
+        </li>
+        <li>
+          <span class="marker">05</span>
+          <div>
+            <div class="feat-title">LLM-справки и PDF-отчёты</div>
+            <div class="feat-desc">Локальная модель через Ollama генерирует управленческие справки по районам; отчёты выгружаются в PDF.</div>
+          </div>
+        </li>
+        <li>
+          <span class="marker">06</span>
+          <div>
+            <div class="feat-title">Прогноз, роли и приём обращений</div>
+            <div class="feat-desc">Прогноз динамики обращений, ролевой доступ (админ/оператор/аналитик), живая лента и публичная форма подачи.</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- screenshots — projects/img/zeroproblems/ -->
+    <section>
+      <p class="label">// интерфейс</p>
+      <div class="shots">
+        <div class="shot wide"><img src="img/zeroproblems/analitic.png" alt="Дашборд аналитики: карта Омской области и Health Score по муниципалитетам" /></div>
+        <div class="shot"><img src="img/zeroproblems/emergency.png" alt="Обращения на карте с фильтрами по классам тяжести" /></div>
+        <div class="shot"><img src="img/zeroproblems/summary.png" alt="Аналитическая сводка по муниципалитету с LLM-справкой" /></div>
+        <div class="shot"><img src="img/zeroproblems/operator.png" alt="Интерфейс оператора: обращения по ведомствам" /></div>
+        <div class="shot"><img src="img/zeroproblems/prediction.png" alt="Прогноз динамики обращений на 4 недели" /></div>
+        <div class="shot wide"><img src="img/zeroproblems/database.png" alt="База обработанных выгрузок и live-поток обращений" /></div>
+      </div>
+    </section>
+
+    <!-- architecture / pipeline -->
+    <section>
+      <p class="label">// пайплайн</p>
+      <div class="diagram">
+<pre>      <span class="node">Excel</span>  <span class="arr">— обращения граждан</span>
+              │
+       <span class="node">Парсинг</span>  <span class="arr">— автоформат, очистка</span>
+              │
+       <span class="node accent">RuBERT / ONNX</span>  <span class="arr">— тяжесть 0–4</span>
+              │
+       <span class="node">Health Score</span>  <span class="arr">— агрегация по МО</span>
+              │
+   <span class="node">Карта · дашборд · drilldown</span>
+              │
+       <span class="node">LLM-справки</span>  <span class="arr">— Ollama + PDF</span></pre>
+      </div>
+      <ul class="principles">
+        <li><strong>Health Score с лог-нормировкой — крупные МО не выигрывают рейтинг просто за счёт объёма обращений.</strong></li>
+        <li><strong>Полностью on-prem: классификатор и LLM работают локально (ONNX + Ollama), данные граждан не уходят во внешние сервисы.</strong></li>
+      </ul>
+    </section>
+
+    <!-- stack -->
+    <section>
+      <p class="label">// стек</p>
+      <div class="stack-groups">
+        <div class="stack-group">
+          <div class="stack-label">ml / nlp</div>
+          <div class="stack">
+            <span class="chip">Python</span>
+            <span class="chip">RuBERT</span>
+            <span class="chip">ONNX Runtime</span>
+            <span class="chip">PyTorch</span>
+            <span class="chip">Ollama</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">бэкенд / данные</div>
+          <div class="stack">
+            <span class="chip">FastAPI</span>
+            <span class="chip">Pydantic</span>
+            <span class="chip">pandas</span>
+            <span class="chip">Excel (calamine/openpyxl)</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">фронтенд</div>
+          <div class="stack">
+            <span class="chip">React</span>
+            <span class="chip">Vite</span>
+            <span class="chip">Leaflet</span>
+            <span class="chip">GeoJSON</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-label">инфра</div>
+          <div class="stack">
+            <span class="chip">Docker Compose</span>
+            <span class="chip">nginx</span>
+            <span class="chip">Let's Encrypt</span>
+            <span class="chip">Nominatim</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<script src="../shared.js"></script>
+</body>
+</html>

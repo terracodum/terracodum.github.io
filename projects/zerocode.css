@@ -1,0 +1,5 @@
+/* Общие стили страницы проекта (те же, что у ExpenseMind).
+   Свои правки для этой страницы дописывай ниже импорта. */
+@import url("expensemind.css");
+
+/* page-specific overrides go here */
