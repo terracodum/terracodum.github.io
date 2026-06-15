@@ -60,6 +60,13 @@ header { margin-bottom: 64px; }
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.45; }
 }
+.signal-sep { opacity: 0.35; }
+.signal-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.signal-link:hover { color: var(--text); }
 
 h1 {
   font-size: 28px;
