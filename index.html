@@ -20,19 +20,17 @@
         <span>nikitakharlov007@gmail.com</span>
       </div>
 
-      <h1>Никита Харлов</h1>
+      <div class="identity">
+        <img class="avatar" src="img/avatar.jpg" alt="Никита Харлов" />
+        <h1>Никита Харлов</h1>
+      </div>
 
       <p class="bio">
         Пишу код, обучаю модели, читаю документацию. Два направления —
         выбери, что интересно.
       </p>
 
-      <div class="links">
-        <a class="link" href="https://github.com/terracodum" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34c-2.23.49-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.88 2.34.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 018 4.32c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          github.com/terracodum
-        </a>
-      </div>
+      <div class="links" data-contacts></div>
     </header>
 
     <section id="achievements-section">
@@ -85,8 +83,8 @@
     </footer>
   </div>
 
+<script src="data.js"></script>
 <script src="portfolio.js"></script>
-<script src="achievements.js"></script>
 <script>renderPortfolio({ achievements: ACHIEVEMENTS });</script>
 </body>
 </html>

@@ -11,10 +11,44 @@ const arrowIcon = `
     <path d="M6 3l5 5-5 5"/>
   </svg>`;
 
+const mailIcon = `
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true">
+    <rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M2 4l6 4.5L14 4"/>
+  </svg>`;
+
+const telegramIcon = `
+  <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+    <path d="M14.5 2.3 1.9 7.1c-.7.3-.7.8-.1 1l3.2 1 1.2 3.8c.2.4.3.6.7.6.3 0 .4-.1.6-.3l1.7-1.6 3.3 2.4c.6.3 1 .2 1.2-.6l2.2-10.3c.2-.9-.3-1.3-1-1z"/>
+  </svg>`;
+
+const CONTACT_ICONS = { github: githubIcon, mail: mailIcon, telegram: telegramIcon };
+
 function escape(s) {
   return String(s).replace(/[&<>"']/g, c => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
   }[c]));
+}
+
+// Ссылки-контакты из PROFILE.contacts (data.js). Единый вид на сайте и в PDF.
+function contactLinksHtml() {
+  return (typeof PROFILE !== "undefined" ? PROFILE.contacts || [] : [])
+    .map(c => {
+      const icon = CONTACT_ICONS[c.icon] || "";
+      const inner = `${icon}${escape(c.label)}`;
+      if (!c.href) return `<span class="link">${inner}</span>`;
+      const ext = /^https?:/.test(c.href) ? ' target="_blank" rel="noopener"' : "";
+      return `<a class="link" href="${escape(c.href)}"${ext}>${inner}</a>`;
+    })
+    .join("");
+}
+
+// Заполняет каждый контейнер [data-contacts] контактами (перед его текущим содержимым,
+// чтобы не затирать, например, кнопку "скачать PDF").
+function renderContacts() {
+  const html = contactLinksHtml();
+  document.querySelectorAll("[data-contacts]").forEach(el => {
+    el.insertAdjacentHTML("afterbegin", html);
+  });
 }
 
 function renderProject(p) {
@@ -99,6 +133,7 @@ function mountSection(sectionId, listId, countId, items, render) {
 }
 
 function renderPortfolio({ projects = [], achievements = [] } = {}) {
+  renderContacts();
   mountSection("achievements-section", "achievements", "achievement-count", achievements, renderAchievement);
   mountSection("projects-section", "projects", "project-count", projects, renderProject);
   const year = document.getElementById("year");
