@@ -1,0 +1,101 @@
+/* PDF / печать.
+   #print-doc собирается теми же классами, что и сайт (portfolio-pdf.js),
+   поэтому основной вид приходит из style.css. Здесь только:
+   показать документ при печати, скрыть остальной сайт,
+   сохранить тёмный фон и заставить браузер печатать цвета/фоны. */
+
+#print-doc { display: none; }
+
+@media print {
+  /* прячем весь экранный сайт, оставляем только собранный документ */
+  body > *:not(#print-doc) { display: none !important; }
+  body::before { display: none !important; }
+
+  html, body {
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Тёмная подложка на КАЖДОМ листе: position:fixed печатается на всех страницах,
+     inset: -20mm растягивает её за поля @page → тёмный фон до физического края,
+     а @page margin ниже даёт одинаковый отступ (gap) на каждой странице. */
+  #print-doc::before {
+    content: "";
+    position: fixed;
+    inset: -20mm;
+    background: var(--bg) !important;
+    z-index: -1;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* заставляем печатать тёмные фоны, бордеры и акценты как на экране */
+  #print-doc,
+  #print-doc * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    transition: none !important;
+  }
+
+  /* поля дают одинаковый gap на каждой странице; тёмными их делает подложка выше */
+  @page { margin: 14mm; }
+
+  #print-doc {
+    display: block !important;
+    max-width: 100%;
+    color: var(--text);
+  }
+
+  /* пульсация точки не нужна на статичной странице */
+  #print-doc .dot { animation: none !important; opacity: 1 !important; }
+
+  /* не рвать карточки (секции пусть текут — иначе высокие секции рубятся криво) */
+  #print-doc .project,
+  #print-doc .achievement { break-inside: avoid; page-break-inside: avoid; }
+
+  /* не отрывать заголовок секции от следующего за ним контента */
+  #print-doc .section-head,
+  #print-doc .pdf-proj .label { break-after: avoid; page-break-after: avoid; }
+
+  #print-doc header { margin-bottom: 36px; }
+  #print-doc .section-stack { margin-top: 40px; }
+
+  /* убрать hover-подсветку/сдвиги, если вдруг сработают */
+  #print-doc .project:hover,
+  #print-doc .link:hover,
+  #print-doc .btn:hover {
+    background: var(--bg-elev);
+    border-color: var(--border);
+  }
+
+  /* ——— полные страницы проектов ——— */
+  #print-doc .pdf-proj { break-before: page; }
+
+  /* скриншоты в PDF — целиком, а не обрезанные (на сайте .shot — cover-плитка) */
+  #print-doc .pdf-proj .shot {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    display: block !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+  }
+  #print-doc .pdf-proj .shot img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+
+  /* не рвать смысловые блоки проекта между страницами */
+  #print-doc .pdf-proj .shot,
+  #print-doc .pdf-proj .features li,
+  #print-doc .pdf-proj .stack-group,
+  #print-doc .pdf-proj .diagram,
+  #print-doc .pdf-proj .api,
+  #print-doc .pdf-proj .code,
+  #print-doc .pdf-proj table { break-inside: avoid; }
+}

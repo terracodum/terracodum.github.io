@@ -7,6 +7,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="stylesheet" href="shared.css" />
 <link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="print.css" />
 </head>
 <body>
   <div class="wrap">
@@ -31,6 +32,24 @@
       </p>
 
       <div class="links" data-contacts></div>
+
+      <div class="pdf-export">
+        <span class="pdf-export-label">// собрать резюме в pdf</span>
+        <div class="pdf-buttons">
+          <button type="button" class="btn pdf-btn" data-pdf="backend">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8m0 0L5 7m3 3l3-3M3 13h10"/></svg>
+            <span>backend</span>
+          </button>
+          <button type="button" class="btn pdf-btn" data-pdf="ml">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8m0 0L5 7m3 3l3-3M3 13h10"/></svg>
+            <span>ml</span>
+          </button>
+          <button type="button" class="btn pdf-btn" data-pdf="all">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8m0 0L5 7m3 3l3-3M3 13h10"/></svg>
+            <span>всё вместе</span>
+          </button>
+        </div>
+      </div>
     </header>
 
     <section id="achievements-section">
@@ -85,6 +104,7 @@
 
 <script src="data.js"></script>
 <script src="portfolio.js"></script>
+<script src="portfolio-pdf.js"></script>
 <script>renderPortfolio({ achievements: ACHIEVEMENTS });</script>
 </body>
 </html>
